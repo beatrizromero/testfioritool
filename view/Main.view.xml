@@ -1,0 +1,115 @@
+<mvc:View controllerName="Coty.RawMaterial.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Page enableScrolling="false">
+        <customHeader>
+			<Bar>
+				<contentLeft />
+				<contentMiddle>
+					<Title text="{i18n>title}" titleStyle="H1"/>
+				</contentMiddle>
+				<contentRight />
+			</Bar>
+		</customHeader>
+        <content>
+            <Panel expandable="true" expanded="true" headerText="{i18n>main_panel_header}" width="auto" class="sapUiLargeMarginBeginEnd sapUiSmallMarginTopBottom">
+            	<VBox>
+            		<HBox >
+                        <VBox width="25%" class="sapUiSmallMarginEnd">
+                            <Label text="{i18n>main_panel_legacy}:"/>
+                            <Input value="{dataModel>/Filters/FilterNumber}" valueLiveUpdate="true"/>
+                        </VBox>
+                        <VBox width="25%" class="sapUiSmallMarginEnd">
+                            <Label text="{i18n>main_panel_code}:"/>
+                            <Input value="{dataModel>/Filters/FilterCode}" valueLiveUpdate="true"/>
+                        </VBox>
+                        <VBox width="25%" class="sapUiSmallMarginEnd">
+                            <Label text="{i18n>main_panel_preferred}:"/>
+                            <Input value="{dataModel>/Filters/FilterPreferred}" valueLiveUpdate="true"/>
+                        </VBox>
+                        <VBox width="25%" class="sapUiSmallMarginEnd">                   
+                            <Label text="{i18n>main_panel_inci}:"/>
+                            <Input value="{dataModel>/Filters/FilterInci}" valueLiveUpdate="true"/>
+                        </VBox>
+                    </HBox>
+        			<HBox>
+        				<VBox width="25%"  class="sapUiSmallMarginEnd">                   
+                            <Label text="{i18n>main_panel_status}:"/>
+                            <MultiComboBox items="{dataModel>/DropStatus}" selectionFinish="onSelectionFinishStatus">
+								<core:Item key="{dataModel>ASTATUS}" text="{dataModel>ASTATUS}"/>
+							</MultiComboBox>
+                        </VBox>
+                        <VBox width="25%" class="sapUiSmallMarginEnd">                   
+                            <Label text="{i18n>main_panel_vendor}:"/>
+                            <Input value="{dataModel>/Filters/FilterVendor}" valueLiveUpdate="true" />
+                        </VBox>
+                        <VBox width="25%" class="sapUiSmallMarginEnd">                   
+                            <Label text="{i18n>main_panel_trade}:"/>
+                            <Input value="{dataModel>/Filters/FilterTrade}" valueLiveUpdate="true" />
+                        </VBox>
+                        <HBox width="25%" alignItems="End" justifyContent="End" class="sapUiSmallMarginEnd">
+	                        <Button text="{i18n>main_panel_go}" type="Emphasized" press="onBtnPressGo"/>
+	                    </HBox>
+                    </HBox>
+            	</VBox>
+            </Panel>
+            <ScrollContainer height="80%" width="auto" horizontal="false" vertical="true" focusable="true" class="sapUiLargeMarginBeginEnd">
+                <Table items="{dataModel>/RawMaterial}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                           <HBox width="100%" alignItems="Center" justifyContent="SpaceBetween">
+                        		<Title text="{parts:['i18n>main_table_header', 'dataModel>/RawMaterial/length'], formatter: 'jQuery.sap.formatMessage'}" level="H2"/>
+                        		<HBox alignItems="Center">
+                        			<Label text="{i18n>main_panel_rows}:" class="sapUiTinyMarginEnd"/>
+                            		<Input value="{dataModel>/RowsSearched}" type="Number" valueLiveUpdate="true" />
+                        		</HBox>
+                        	</HBox>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="{i18n>main_table_raw}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_mpcode}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_code}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_preferred}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_inci}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_status}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_vendor}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_trade}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>main_table_date}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Link text="{dataModel>ARAWMATERIALSPECNUMBER}" press="onPressMaterial"/>
+                                <Text text="{dataModel>AMMS_CODE}"/>
+                                <Text text="{dataModel>SAPRD_CODE}"/>
+                                <Text text="{dataModel>APREFERREDNAME}"/>
+                                <Text text="{dataModel>AINCINAME}"/>
+                                <Text text="{dataModel>ASTATUS}"/>
+                                <Text text="{dataModel>ASUPPLIERID}{= !!${dataModel>ASUPPLIERID} ? ${i18n>main_table_extraSupplier} : ${dataModel>ASUPPLIERID}}"/>
+                                <Text text="{dataModel>ATRADENAME}"/>
+                                <Text text="{dataModel>AEDITEDDATE}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </content>
+    </Page>
+</mvc:View>

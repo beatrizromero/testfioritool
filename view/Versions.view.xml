@@ -1,0 +1,54 @@
+<mvc:View controllerName="Coty.RawMaterial.controller.Versions" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Page enableScrolling="false">
+        <customHeader>
+			<Bar>
+				<contentLeft>
+					<Button icon="sap-icon://nav-back" press="onBtnPressNavBack"/>
+				</contentLeft>
+				<contentMiddle>
+					<Title text="{i18n>title}" titleStyle="H1"/>
+				</contentMiddle>
+				<contentRight />
+			</Bar>
+		</customHeader>
+		<subHeader>
+			<OverflowToolbar>
+				<Text text="{dataModel>/MaterialSelected/ARAWMATERIALSPECNUMBER} {dataModel>/MaterialSelected/AINCINAME} {i18n>versions_header}" maxLines="2" class="fontTitle sapUiLargeMargin" width="100%"/>
+            </OverflowToolbar>
+		</subHeader>
+        <content>
+            <ScrollContainer height="90%" width="auto" horizontal="false" vertical="true" focusable="true" class="sapUiLargeMarginBeginEnd sapUiSmallMarginTopBottom">
+                <Table items="{dataModel>/Versions}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+                    <columns>
+                        <Column>
+                            <Text text="{i18n>versions_revision}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>versions_date}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>versions_change}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>versions_by}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>versions_title}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Active" press="onPressVersion">
+                            <cells>
+                                <Text text="{dataModel>VERSION}"/>
+                                <Text text="{dataModel>AREQUESTDATE}"/>
+                                <Text text="{dataModel>AREASONFORCHANGE}"/>
+                                <Text text="{dataModel>AREQUESTEDBY}"/>
+                                <Text text="{dataModel>APREFERREDNAME}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </content>
+    </Page>
+</mvc:View>
