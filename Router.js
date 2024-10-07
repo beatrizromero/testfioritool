@@ -1,1 +1,0 @@
-sap.ui.define(["sap/ui/core/mvc/Controller","Coty/RawMaterial/util/Constants","sap/ui/core/routing/History"],function(t,o,e){"use strict";return t.extend("Coty.RawMaterial.view.Router",{getRouter:function(){return sap.ui.core.UIComponent.getRouterFor(this)},navBack:function(t,o=-1){window.history.go(o)}})});
