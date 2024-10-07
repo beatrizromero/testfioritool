@@ -1,9 +1,0 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Coty.RawMaterial.controller.App">
-	<App id="app">
-		<pages>
-			<Page>
-				<content></content>
-			</Page>
-		</pages>
-	</App>
-</mvc:View>
