@@ -1,0 +1,208 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "apptorparameters",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.1.5"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.11.4",
+      "toolsId": "0d7e66b4-a694-45d6-9441-21632b63ba7c"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/oData/v4/catalog-parameters/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "valueHelpService": {
+        "uri": "/v2/oData/v4/catalog-product/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "userRolesService": {
+        "uri": "/v2/oData/v4/catalog-user-roles/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "Parameter-Display": {
+          "semanticObject": "Parameter",
+          "action": "Display",
+          "title": "{{parametersDisplayTitle}}",
+          "icon": "sap-icon://database",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.120.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "flexEnabled": true,
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "apptorparameters.i18n.i18n"
+        }
+      },
+      "mainModel": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "useBatch": false
+        }
+      },
+      "valueHelpModel": {
+        "dataSource": "valueHelpService",
+        "preload": true,
+        "settings": {
+          "useBatch": false
+        }
+      },
+      "userRolesModel": {
+        "dataSource": "userRolesService",
+        "preload": true,
+				"settings": {
+					"useBatch": false,
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Inline"
+				}
+      },
+      "localModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "messageModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "rolesModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			}
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "apptorparameters.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Table",
+          "pattern": "",
+          "target": [
+            "Table"
+          ]
+        },
+        {
+          "name": "CreateView",
+          "pattern": "Create",
+          "target": [
+            "CreateView"
+          ]
+        },
+        {
+          "name": "EditView",
+          "pattern": "Edit",
+          "target": [
+            "EditView"
+          ]
+        }
+      ],
+      "targets": {
+        "Table": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "Table",
+          "viewName": "Table",
+          "viewLevel": 1
+        },
+        "CreateView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "CreateView",
+          "viewName": "CreateView",
+          "viewLevel": 2
+        },
+        "EditView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "EditView",
+          "viewName": "EditView",
+          "viewLevel": 2
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "apptorparameters.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "apptorparameters"
+  }
+}

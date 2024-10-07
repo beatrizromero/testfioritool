@@ -1,0 +1,88 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="descriptionDialog"
+        title="{i18n>createView.table.Description}"
+    >
+        <content>
+            <table:Table
+                rows="{localModel>/selectedDescription/descriptions}"
+                rowSelectionChange="onSelectedParentRowDescription"
+                id="descriptionTable"
+                rowsUpdated="onUpdateFinishTable"
+            >
+                <table:extension>
+                    <OverflowToolbar id="extensionOverflowToolbar">
+                        <ToolbarSpacer id="extensionOverflowToolbarSpacer" />
+                        <Button
+                            id="deleteButton"
+                            icon="sap-icon://delete"
+                            text="{i18n>button.delete}"
+                            press="onPressDeleteDescriptionsButton"
+                        />
+                        <Button
+                            id="addButton"
+                            text="{i18n>createView.table.Add}"
+                            icon="sap-icon://add"
+                            press="onPressAddRowDescriptions"
+                        />
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column id="dialogParamValueDescColumn">
+                        <Label
+                            id="dialogParamValueDescLabel"
+                            text="{i18n>table.param_value_desc}"
+                        />
+                        <table:template>
+                            <Input
+                                id="dialogParamValueDescInput"
+                                value="{localModel>param_value_desc}"
+                                maxLength="40"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column id="dialogLangColumn">
+                        <Label
+                            id="dialogLangLabel"
+                            text="{i18n>table.lang}"
+                        />
+                        <table:template>
+                            <Select
+                                width="100%"
+                                id="langCodeSelectDescr"
+                                items="{ path: 'localModel>/oSelectLang',templateShareable:false}"
+                                selectedKey="{localModel>lang}"
+                            >
+                                <core:Item
+                                    id="filterStatusSelectItemCreateView"
+                                    key="{localModel>key}"
+                                    text="{localModel>value}"
+                                />
+                            </Select>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </content>
+        <buttons>
+            <Button
+                id="dialogRejectButton"
+                text="{i18n>common.btn.text.cancel}"
+                type="Reject"
+                press="onBtnPressCancelOrderData"
+            />
+            <Button
+                id="dialogConfirmButton"
+                text="{i18n>common.btn.text.confirm}"
+                type="Emphasized"
+                press="onBtnPressConfirmOrderData"
+            />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

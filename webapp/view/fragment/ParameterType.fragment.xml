@@ -1,0 +1,18 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        id="parameterTypeId"
+        title="{i18n>main.parameterType}"
+        items="{path:'localModel>/parameterTypes'}"
+        search=".utils.simpleSetValueHelpFilters"
+        confirm=".utils.onDialogCloseDialogs"
+        cancel=".utils.onDialogCloseDialogs"
+    >
+        <StandardListItem
+            id="selectDialogProductItem"
+            title="{localModel>param}"
+        />
+    </SelectDialog>
+</c:FragmentDefinition>

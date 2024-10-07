@@ -1,0 +1,114 @@
+<mvc:View
+    controllerName="apptorparameters.controller.Table"
+    xmlns="sap.m"
+	xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:table="sap.ui.table"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core">
+    <Page id="tablePage" 
+          enableScrolling="true" 
+          title="{i18n>table.page.title}" 
+          titleLevel="H6"
+          showHeader="true" 
+          titleAlignment="Center"
+          class="sapUiNoContentPadding">
+        <content>
+        <f:DynamicPage id="IDDynamicPage1" showFooter="false">
+            <f:header>
+                <f:DynamicPageHeader pinnable="false" id="IDDynamicPageHeader1">
+                    <f:content>
+                       <core:Fragment fragmentName="apptorparameters.view.fragment.FilterBar" type="XML" />
+                    </f:content>
+                </f:DynamicPageHeader>
+            </f:header>
+            <f:content>
+                <table:Table
+                    id="TableViewTable"
+                    rows="{localModel>/ParameterTable}"
+                    busyIndicatorDelay="0"
+                    selectionMode="MultiToggle"
+                    enableSelectAll="true"
+                    rowSelectionChange="onSelectionChange"
+                    rowMode="Auto"
+                    class="sapFDynamicPageAlignContent">
+                    <table:columns>
+                        <table:Column
+                            id="paramColumn"
+                            sortProperty="param"
+                            filterProperty="param">
+                            <Label id="paramLabel" text="{i18n>table.param}" />
+                            <table:template>
+                                <Text id="paramLabelText" text="{localModel>param}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column
+                            id="paramValueColumn"
+                            sortProperty="param_value"
+                            filterProperty="param_value">
+                            <Label id="parameterValueLabel" text="{i18n>table.param_value}" />
+                            <table:template>
+                                <Text id="paramValueText" text="{localModel>param_value}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column
+                            id="paramValueDescColumn"
+                            sortProperty="param_value_desc"
+                            filterProperty="param_value_desc">
+                            <Label id="paramValueDescLabel" text="{i18n>table.param_value_desc}" />
+                            <table:template>
+                                <Text id="paramValueDescText" text="{localModel>param_value_desc}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column
+                            id="langColumn"
+                            sortProperty="lang"
+                            filterProperty="lang">
+                            <Label id="labelLabel" text="{i18n>table.lang}" />
+                            <table:template>
+                                <Text id="langText" text="{localModel>lang}"/>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                    <table:extension>
+                        <OverflowToolbar id="otbSubheader">
+                            <Title
+                                id="title"
+                                text="{i18n>table.table.title}"/>
+                            <ToolbarSpacer id="extensionToolbarSpacer"/>
+                            <Button
+                                id="createButton"
+                                icon="sap-icon://add"
+                                text="{i18n>button.create}"
+                                press="onPressCreateButton"
+                                enabled="{rolesModel>/isEditUser}"/>
+                            <Button
+                                id="editButton"
+                                icon="sap-icon://edit"
+                                text="{i18n>button.edit}"
+                                press="onPressEditButton"
+                                enabled="{rolesModel>/isEditUser}"/>
+                            <Button
+                                id="deleteButton"
+                                icon="sap-icon://delete"
+                                text="{i18n>button.delete}"
+                                press="onPressDeleteButton"
+                                enabled="{rolesModel>/isEditUser}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                </table:Table>
+            </f:content>
+        </f:DynamicPage>
+    </content>
+    <footer>
+        <OverflowToolbar id="footerOverflowToolbar">
+                <Button
+                    id="TableViewMessagePopoverBtn"
+                    ariaHasPopup="Dialog"
+                    press="messagePopOverPress"/>
+                <ToolbarSpacer id="footerOverflowToolbarSpacer"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

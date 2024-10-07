@@ -1,0 +1,11 @@
+<mvc:View controllerName="apptorparameters.controller.App"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <App id="app" class="sapUiResponsiveContentPadding">
+        <pages>
+            <Page id="appPage">
+                <content/>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

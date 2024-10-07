@@ -1,0 +1,104 @@
+_schema-version: "3.2"
+ID: apptorparameters
+description: Fiori app to maintain TOR related parameters
+version: 0.1.5
+modules:
+# -----------------------------------------------------------------
+- name: apptorparameters-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: apptorparameters-dest
+    parameters:
+      content-target: true
+  - name: apptorparameters-repo-dt
+    parameters:
+      service-key:
+        name: apptorparameters-repo-dt-key
+  - name: ishift_tor-xsuaa-service
+    parameters:
+      service-key:
+        name: apptorparameters-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: apptorparameters_html_repo_dt
+          ServiceInstanceName: apptorparameters-html5-dt
+          ServiceKeyName: apptorparameters-repo-dt-key
+          sap.cloud.service: apptorparameters
+        - Authentication: OAuth2UserTokenExchange
+          Name: ishift_tor-xsuaa-service
+          ServiceInstanceName: ishift_tor-xsuaa-service
+          ServiceKeyName: apptorparameters-key
+          sap.cloud.service: apptorparameters          
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+# -----------------------------------------------------------------
+- name: apptorparameters-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: apptorparameters-repo-dt
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - apptorparameters.zip
+      name: apptorparameters
+      target-path: resources/
+# -----------------------------------------------------------------
+- name: apptorparameters
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+  requires:
+  - name: ishift_tor-dest
+  - name: apptorparameters-dest
+  - name: apptorparameters-log
+# -----------------------------------------------------------------
+resources:
+# force existing backend deployment to be checked, ishift_tor-dest is created by backend when deployed
+- name : ishift_tor-dest
+  type : org.cloudfoundry.existing-service
+# force existing backend deployment to be checked, ishift_tor-xsuaa-service is created by backend when deployed
+- name : ishift_tor-xsuaa-service
+  type : org.cloudfoundry.existing-service
+# html5 repo instances
+- name: apptorparameters-repo-dt
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: apptorparameters-html5-dt
+    service-plan: app-host
+- name: apptorparameters-repo-rt
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: apptorparameters-html5-rt
+    service-plan: app-runtime
+# html5 repo dest
+- name: apptorparameters-dest
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-plan: lite
+- name: apptorparameters-log
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: application-logs
+    service-plan: lite   
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

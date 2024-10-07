@@ -1,0 +1,106 @@
+<mvc:View
+    controllerName="apptorparameters.controller.EditView"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:table="sap.ui.table"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core">
+    <Page
+        id="editViewPage"
+        enableScrolling="true"
+        title="{i18n>editView.page.title}"
+        titleLevel="H6"
+        showHeader="true"
+        showNavButton="true"
+        navButtonPress="onNavButtonPress"
+        titleAlignment="Center"
+        class="sapUiNoContentPadding">
+        <content>
+            <f:DynamicPage
+                id="IDDynamicPage2"
+                showFooter="false">
+                <f:header>
+                    <f:DynamicPageHeader pinnable="false" id="IDDynamicPageHeader2">
+                        <f:content>
+                            <Title
+                                id="tableTitle3"
+                                text="{i18n>editView.table.title}"
+                                level="H2"/>
+                        </f:content>
+                    </f:DynamicPageHeader>
+                </f:header>
+                <f:content>
+                    <table:Table
+                        id="EditViewTable"
+                        busyIndicatorDelay="0"
+                        rows="{localModel>/EditTOR_PARAMETER_TOTALView}"
+                        rowSelectionChange="onSelectionChange"
+                        class="sapFDynamicPageAlignContent"
+                        rowMode="Auto">
+                        <table:columns>
+                            <table:Column id="paramColumn">
+                                <Label
+                                    id="paramLabel"
+                                    text="{i18n>table.param}"/>
+                                <table:template>
+                                    <Text
+                                        id="paramText"
+                                        text="{localModel>param}"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column id="paramValueColumn">
+                                <Label
+                                    id="paramValueLabel"
+                                    text="{i18n>table.param_value}"/>
+                                <table:template>
+                                    <Text
+                                        id="paramValueText"
+                                        text="{localModel>param_value}"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column id="paramValueDescColumn">
+                                <Label
+                                    id="paramValueDescLabel"
+                                    text="{i18n>table.param_value_desc}"/>
+                                <table:template>
+                                    <Input
+                                        id="paramValueDescInput"
+                                        value="{localModel>param_value_desc}"
+                                        maxLength="40"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column id="langColumn">
+                                <Label
+                                    id="langLabel"
+                                    text="{i18n>table.lang}"/>
+                                <table:template>
+                                    <Text
+                                        id="langText"
+                                        text="{localModel>lang}"/>
+                                </table:template>
+                            </table:Column>
+                        </table:columns>
+                    </table:Table>
+                </f:content>
+            </f:DynamicPage>
+        </content>
+        <footer>
+            <OverflowToolbar id="footerOverflowToolbar">
+                <Button
+                    id="EditViewMessagePopoverBtn"
+                    ariaHasPopup="Dialog"/>
+                <ToolbarSpacer id="footerOverflowToolbarSpacer" />
+                <Button
+                    id="saveButton"
+                    icon="sap-icon://save"
+                    text="{i18n>button.save}"
+                    press="onPressSaveEditButton"
+                    type="Emphasized"
+                    busyIndicatorDelay="0"
+                    enabled="{rolesModel>/isEditUser}"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>
